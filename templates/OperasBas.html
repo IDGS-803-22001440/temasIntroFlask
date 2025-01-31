@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block container%}
+<h1>Calcular</h1>
+
+<form action="/resultado" method="post">
+    <label>N1:</label>
+    <input type="number" name="n1"><br>
+    <label>N2:</label>
+    <input type="number" name="n2"><br>
+    <input type="submit" value="Sumar" class="btn btn-primary">
+    <input type="submit" value="Restar" class="btn btn-primary">
+    <input type="submit" value="Multiplicar" class="btn btn-primary">
+    <input type="submit" value="Dividir" class="btn btn-primary">
+</form>
+<div class="">
+<lavel>La suma de {{n1}} y {{n2}} es {{rs}}</lavel>
+</div>
+
+
+{% endblock %}
