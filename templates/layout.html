@@ -1,28 +1,50 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" conten="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            padding-top: 60px;
+        }
+        .tr-head{background: #dff0d8;}
+    </style>
+    <link href="../static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
 <body>
-    <div class="conteiner mt-4">
-        <div class="row">
-            <h1>Curso Flask</h1>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <td>Ejemplo 1</td>
-                        <td>Ejemplo 2</td>
-                        <td>Ejemplo 3</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Dato 1</td>
-                        <td>dato 2</td>
-                        <td>dato 3</td>
-                    </tr>
-                </tbody>
-            </table>
-            {% block container %}
-
-            {% endblock %}
+    <div class="navbar navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a href="" class="brand">
+                    IDGS803
+                </a>
+                <ul class="nav">
+                    <li class="active">
+                        <a href="">
+                            <i class="icon-homne icon-white"></i> Inicio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="icon-user icon-white"></i>
+                            Usuarios
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="icon-user icon-white"></i>
+                            Alumnos
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
+    </div>
+    <div class="container">
+        {% block container %}
+            {%endblock%}
     </div>
 </body>
 </html>
