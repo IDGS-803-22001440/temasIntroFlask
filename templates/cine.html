@@ -1,0 +1,46 @@
+{% extends "Layout1.html" %}
+
+{% block container%}
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="contenedor">
+            <h2>Entrada</h2>
+            <form action="/calculo" method="post">
+                <label>Nombre:</label>
+                <input type="text" name="name"><br>
+                <label>Numero de compradores:</label>
+                <input type="number" name="nc"><br>
+                <label>Targeta de cineco:</label>
+                <label for="target">Si</label>
+                <input type="radio" name="target" value="si">
+                <label for="target">No</label>
+                <input type="radio" name="target" value="no"><br>
+                <label>Numero de boletos:</label>
+                <input type="number" name="nb"><br>
+                
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="contenedor">
+            <h2>Salida</h2>
+            <label>Nombre:</label>
+            <input type="text" value="{{mesage}}" name="val"><br>
+        </div>
+    </div>
+</div>
+
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="contenedor">
+            <h2>Acciones</h2>
+            <input type="submit" value="calcular" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+    {% endblock %}

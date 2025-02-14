@@ -15,37 +15,58 @@ def operas():
 @app.route("/resultado", methods=["GET","POST"])
 def suma():
     if request.method == "POST":
-        val = reques.form.get("Sumar")
-        num1=request.form.get("n1")
-        num2=request.form.get("n2")
-        rs=num1+num2
-        return render_template("OperasBas.html",n1=num1,n2=num2,rs=rs)
+        if  reques.form.get("Sumar") == "Sumar":
+            num1=request.form.get("n1")
+            num2=request.form.get("n2")
+            rs=num1+num2
+            return render_template("OperasBas.html",n1=num1,n2=num2,rs=rs)
+        elif reques.form.get("Restar") == "Restar":
+            num1=request.form.get("n1")
+            num2=request.form.get("n2")
+            rs=num1-num2
+            return render_template("OperasBas.html",n1=num1,n2=num2,rs=rs)
+        elif reques.form.get("Multiplicar") == "Multiplicar":
+            num1=request.form.get("n1")
+            num2=request.form.get("n2")
+            rs=num1*num2
+            return render_template("OperasBas.html",n1=num1,n2=num2,rs=rs)
+        elif reques.form.get("Dividir") == "Dividir":
+            num1=request.form.get("n1")
+            num2=request.form.get("n2")
+            rs=num1/num2
+            return render_template("OperasBas.html",n1=num1,n2=num2,rs=rs)
 
-@app.route("/resultado", methods=["GET","POST"])
-def resta():
+@app.route("/cine")
+def cine():
+    return render_template("cine.html")
+
+@app.route("/calculo", methods=["GET","POST"])
+def calcularE():
     if request.method == "POST":
-        num1=request.form.get("n1")
-        num2=request.form.get("n2")
-        rs=num1-num2
-        return render_template("OperasBas.html",n1=num1,n2=num2,rs=rs)
-
-
-@app.route("/resultado", methods=["GET","POST"])
-def multiplicacion():
-    if request.method == "POST":
-        num1=request.form.get("n1")
-        num2=request.form.get("n2")
-        rs=num1*num2
-        return render_template("OperasBas.html",n1=num1,n2=num2,rs=rs)
-
-@app.route("/resultado", methods=["GET","POST"])
-def division():
-    if request.method == "POST":
-        num1=request.form.get("n1")
-        num2=request.form.get("n2")
-        rs=num1/num2
-        return render_template("OperasBas.html",n1=num1,n2=num2,rs=rs)
-
+        request.form.get("calcular")
+        name=request.form.get("name")
+        num1=int(request.form.get("nc"))
+        num2=int(request.form.get("nb"))
+        trg=request.form.get("target")
+        rs=0
+        if (num1*7)>num2 :
+            if trg == "no":
+                if num2>5:
+                    rs=(num2*12)*.85
+                elif num2>2 and num2 <= 5:
+                    rs=(num2*12)*.90
+            elif trg == "si":
+                if num2>5:
+                    rs=(num2*12)*.75
+                elif num2>2 and num2 <= 5:
+                    rs=(num2*12)*.80
+                elif num2>0 and num2 <= 2:
+                    rs=(num2*12)*.90
+        else:
+            mesage="No puedes comprar esa cantidad de voletos "
+            return render_template("cine.html",mesage=mesage)
+        mesage=f"Hola {name} compraste {num2} boletos y tu total a pagar es {rs}$"
+        return render_template("cine.html",mesage=mesage)
 
 
 @app.route('/hola')
@@ -63,10 +84,6 @@ def numero(n):
 @app.route("/user/<string:user>/<int:id>")
 def username(user, id):
     return f"Nombre: {user} ID: {id}!!!"
-
-@app.route("/suma/<float:n1>/<float:n2>")
-def suma(n1, n2):
-    return "La suma es: {}!!!".format(n1+n2)
 
 """@app.route("/default")
 @app.route("/default/<string:nom")
