@@ -1,11 +1,53 @@
 from flask import Flask, render_template,request
+from flask import g
+from flask_wtf.csrf import CSRFProtect
+from flask import flash
+import forms
 
 app=Flask(__name__)
+app.secret_key="Esta es la clave screta"
+csrf = CSRFProtect()
+
+@app.errorhandler(400)
+def page_not_found(e):
+    return render_template('casa.html'), 404
+
+@app.before_request
+def before_request():
+    g.nombre = "Mario"
+    print(' Before request 1')
+
+
+@app.after_request
+def after_request(response):
+    print(' After request 3')
+    return response
+
 @app.route('/')
 def index():
     grupo="IDGS803"
     lista="Juan","Pedro","Mario"
+    print("Holoa {}".format(g.nombre))
     return render_template("index.html",grupo=grupo,lista=lista)
+
+
+@app.route("/Alumnos",methods=["GET","POST"])
+def alumnos():
+    mat=''
+    nom=''
+    edad=''
+    correo=''
+    ape=''
+    alumno_clase=forms.UserForm(request.form)
+    if request.method=='POST' and alumno_clase.validate():
+        mat=alumno_clase.matricula.data
+        ape=alumno_clase.apellidos.data
+        nom=alumno_clase.nombre.data
+        edad=alumno_clase.edad.data
+        correo=alumno_clase.email.data
+        mensaje = "Bienvenido {}".format(nom)
+        flash(mensaje)
+    return render_template("Alumnos.html",form=alumno_clase,mat=mat,nom=nom,ape=ape,edad=edad,correo=correo)
 
 
 @app.route("/OperasBas")
@@ -106,5 +148,6 @@ def ejemplo1():
 
 
 if __name__ == '__main__':
+    csrf.init_app(app)
     app.run(debug=True, port=5000)
 
